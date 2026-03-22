@@ -1,0 +1,68 @@
+# useSteps
+
+Manages step navigation state. This is the core hook — headless, no UI required.
+
+```ts
+import { useSteps } from '@franxx/react-formsteps-core';
+
+const {
+  currentStep,    // number — 0-indexed current step
+  totalSteps,     // number
+  isFirst,        // boolean
+  isLast,         // boolean
+  next,           // () => void
+  prev,           // () => void
+  goTo,           // (index: number) => void
+  progress,       // number — 0 to 100
+} = useSteps({ totalSteps: 3 });
+```
+
+## Options
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `totalSteps` | `number` | — | **Required.** Total number of steps. Must be a positive integer |
+| `initialStep` | `number` | `0` | Zero-based index of the starting step |
+| `onComplete` | `() => void` | — | Called once when the user first arrives at the last step |
+
+## Return value
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `currentStep` | `number` | Current step index (0-based) |
+| `totalSteps` | `number` | Total number of steps passed in |
+| `isFirst` | `boolean` | `true` when on step 0 |
+| `isLast` | `boolean` | `true` when on the last step |
+| `next` | `() => void` | Advance to next step (no-op on last step) |
+| `prev` | `() => void` | Go back to previous step (no-op on first step) |
+| `goTo` | `(index: number) => void` | Jump to any step by 0-based index. Ignores out-of-range values |
+| `progress` | `number` | Percentage from `0` to `100` representing position in the flow |
+
+## Example
+
+```tsx
+function RegistrationForm() {
+  const { currentStep, next, prev, isFirst, isLast, progress, totalSteps } = useSteps({
+    totalSteps: 3,
+    onComplete: () => console.log('Reached last step!'),
+  });
+
+  return (
+    <div>
+      <div>Step {currentStep + 1} of {totalSteps}</div>
+      <progress value={progress} max={100} />
+
+      {/* render step content */}
+
+      <button onClick={prev} disabled={isFirst}>Back</button>
+      <button onClick={next}>{isLast ? 'Finish' : 'Next'}</button>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- `totalSteps` must be `> 0`, otherwise a runtime error is thrown.
+- `goTo` silently ignores values outside `[0, totalSteps - 1]`.
+- `progress` equals `0` on step 0 and `100` on the last step.

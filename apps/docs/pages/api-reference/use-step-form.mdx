@@ -1,0 +1,79 @@
+# useStepForm
+
+Integrates `react-hook-form` with per-step Zod validation. Validates only the current step's schema before allowing the user to advance.
+
+```ts
+import { useStepForm } from '@franxx/react-formsteps-core';
+import { z } from 'zod';
+
+const schema = z.object({ email: z.string().email() });
+
+const {
+  form,               // UseFormReturn<z.infer<typeof schema>>
+  nextWithValidation, // () => Promise<boolean>
+  isValidating,       // boolean
+} = useStepForm({ schema });
+```
+
+## Options
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `schema` | `ZodType` | — | **Required.** Zod schema for the current step |
+| `defaultValues` | `Partial<z.infer<TSchema>>` | `undefined` | Initial field values |
+| `onNext` | `(data: z.infer<TSchema>) => void` | — | Called with validated data when `nextWithValidation` succeeds |
+
+## Return value
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `form` | `UseFormReturn<z.infer<TSchema>>` | Full react-hook-form instance. Use to register fields, access errors, etc. |
+| `nextWithValidation` | `() => Promise<boolean>` | Triggers validation. Returns `true` if valid, `false` otherwise |
+| `isValidating` | `boolean` | `true` while async validation is in progress |
+
+## Example
+
+```tsx
+import { useSteps, useStepForm } from '@franxx/react-formsteps-core';
+import { z } from 'zod';
+
+const schemas = [
+  z.object({ name: z.string().min(1, 'Required') }),
+  z.object({ email: z.string().email() }),
+];
+
+function MultiStepForm() {
+  const { currentStep, next, isLast } = useSteps({ totalSteps: schemas.length });
+
+  const { form, nextWithValidation, isValidating } = useStepForm({
+    schema: schemas[currentStep],
+    onNext: (data) => console.log('Step data:', data),
+  });
+
+  const handleNext = async () => {
+    const ok = await nextWithValidation();
+    if (ok && !isLast) next();
+  };
+
+  return (
+    <form>
+      {currentStep === 0 && (
+        <input {...form.register('name')} placeholder="Name" />
+      )}
+      {currentStep === 1 && (
+        <input {...form.register('email')} placeholder="Email" />
+      )}
+
+      <button type="button" onClick={handleNext} disabled={isValidating}>
+        {isLast ? 'Submit' : 'Next'}
+      </button>
+    </form>
+  );
+}
+```
+
+## Notes
+
+- `nextWithValidation` calls `form.trigger()` internally — it validates all fields registered in the current step.
+- The `schema` option should change when `currentStep` changes. Pass `schemas[currentStep]` directly.
+- `form` is a standard `react-hook-form` `UseFormReturn` — all react-hook-form APIs are available on it.

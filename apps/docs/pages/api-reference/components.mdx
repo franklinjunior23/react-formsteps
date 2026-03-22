@@ -1,0 +1,120 @@
+# UI Components
+
+Pre-built React components from `@franxx/react-formsteps-ui`. All components consume the `StepsContext` internally — they must be used inside a `<Steps>` provider.
+
+```bash
+pnpm add @franxx/react-formsteps-ui
+```
+
+---
+
+## `<Steps>`
+
+Root provider component. Manages all step state and exposes it via context to child components.
+
+```tsx
+import { Steps, Step } from '@franxx/react-formsteps-ui';
+
+<Steps schemas={[schema1, schema2, schema3]} onSubmit={(data) => console.log(data)}>
+  <Step>...</Step>
+  <Step>...</Step>
+  <Step>...</Step>
+</Steps>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `schemas` | `ZodType[]` | — | **Required.** One Zod schema per `<Step>` child |
+| `onSubmit` | `(data: Record<string, unknown>) => void` | — | Called with merged, validated data on final submit |
+| `initialStep` | `number` | `0` | Starting step index |
+| `className` | `string` | `'w-full max-w-xl mx-auto'` | CSS class for the wrapper `div` |
+
+### Notes
+
+- `schemas.length` must equal the number of `<Step>` children. A dev-mode warning is logged otherwise.
+- Final submit runs `validateAllSteps` against all accumulated data before calling `onSubmit`.
+
+---
+
+## `<Step>`
+
+Wrapper for each step's content. Renders its children with an optional heading.
+
+```tsx
+<Step title="Personal Info">
+  <input name="name" />
+</Step>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | Optional heading rendered above the step content |
+| `className` | `string` | `'w-full'` | CSS class for the wrapper `div` |
+| `children` | `React.ReactNode` | — | Step content |
+
+---
+
+## `<StepBar>`
+
+Visual progress bar. Reads current step from context automatically.
+
+```tsx
+import { StepBar } from '@franxx/react-formsteps-ui';
+
+<StepBar showLabels labels={['Info', 'Contact', 'Password']} />
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showLabels` | `boolean` | `false` | Show step labels below the progress bar |
+| `labels` | `string[]` | — | Label for each step. Length should match `totalSteps` |
+| `className` | `string` | `'w-full mb-6'` | CSS class for the wrapper `div` |
+
+### Notes
+
+- Displays "Step X of Y" and a percentage alongside the bar.
+- A dev-mode warning is logged when `labels.length !== totalSteps`.
+
+---
+
+## `<StepNav>`
+
+Navigation buttons (Back / Next / Submit). Validates the current step's schema before advancing.
+
+```tsx
+import { StepNav } from '@franxx/react-formsteps-ui';
+
+<StepNav
+  nextLabel="Continue"
+  prevLabel="Go back"
+  submitLabel="Create account"
+  onSubmit={handleFinalSubmit}
+/>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `nextLabel` | `string` | `'Next'` | Label for the Next button |
+| `prevLabel` | `string` | `'Back'` | Label for the Back button |
+| `submitLabel` | `string` | `'Submit'` | Label shown on the last step instead of Next |
+| `onBeforeNext` | `() => Promise<boolean> \| boolean` | — | Async gate. Return `false` to block advancing |
+| `onSubmit` | `() => void` | — | Called when the user clicks Submit on the last step |
+| `getValues` | `() => Record<string, unknown>` | — | Provide current form values for schema validation. Falls back to context `formData` |
+| `className` | `string` | `'flex items-center justify-between mt-6 gap-4'` | CSS class for the wrapper `div` |
+
+### Validation flow
+
+When the user clicks Next, `StepNav` runs this sequence:
+
+1. Reads `schemas[currentStep]` from context.
+2. If a schema exists, calls `validateStep(schema, data)`. Blocks if invalid.
+3. If `onBeforeNext` is provided, calls it. Blocks if it returns `false`.
+4. Calls `next()` (or `onSubmit()` on the last step).

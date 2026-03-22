@@ -1,0 +1,86 @@
+# Context
+
+The steps context lets any component deep in the tree access and control the wizard state without prop drilling.
+
+---
+
+## `useStepsContext`
+
+Reads the current steps context. Must be called inside a `<Steps>` provider or a `<StepsProvider>`.
+
+```ts
+import { useStepsContext } from '@franxx/react-formsteps-core';
+
+const {
+  currentStep,
+  totalSteps,
+  isFirst,
+  isLast,
+  next,
+  prev,
+  goTo,
+  formData,
+  setStepData,
+  schemas,
+} = useStepsContext();
+```
+
+### Context value
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `currentStep` | `number` | Current step index (0-based) |
+| `totalSteps` | `number` | Total number of steps |
+| `isFirst` | `boolean` | `true` when on step 0 |
+| `isLast` | `boolean` | `true` when on the last step |
+| `next` | `() => void` | Advance to the next step |
+| `prev` | `() => void` | Go back to the previous step |
+| `goTo` | `(index: number) => void` | Jump to any step by index |
+| `formData` | `Record<string, unknown>` | Accumulated data from all steps |
+| `setStepData` | `(step: number, data: Record<string, unknown>) => void` | Merge data for a step into the accumulated store |
+| `schemas` | `ZodType[]` | Zod schemas for each step |
+
+### Notes
+
+- Throws `Error: useStepsContext must be used within a StepsProvider` if called outside a provider.
+
+---
+
+## `StepsProvider`
+
+Headless context provider for use without the UI components package. Gives full access to the context without rendering any UI.
+
+```tsx
+import { StepsProvider, useStepsContext } from '@franxx/react-formsteps-core';
+
+function App() {
+  return (
+    <StepsProvider schemas={[schema1, schema2]} onSubmit={(data) => console.log(data)}>
+      <MyCustomWizard />
+    </StepsProvider>
+  );
+}
+
+function MyCustomWizard() {
+  const { currentStep, next, prev, isLast } = useStepsContext();
+  // full control, bring your own UI
+  return <div>...</div>;
+}
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `schemas` | `ZodType[]` | — | **Required.** One schema per step. Determines `totalSteps` |
+| `onSubmit` | `(data: Record<string, unknown>) => void` | — | Called after final validation succeeds |
+| `initialStep` | `number` | `0` | Starting step index |
+| `children` | `React.ReactNode` | — | Tree that can consume `useStepsContext` |
+
+### When to use `StepsProvider` vs `<Steps>`
+
+| | `StepsProvider` (core) | `<Steps>` (ui) |
+|--|------------------------|----------------|
+| Renders UI | No — headless | Yes — wraps children in a div |
+| Requires `@franxx/react-formsteps-ui` | No | Yes |
+| Use case | Custom UI, existing design systems | Quick start with pre-built components |

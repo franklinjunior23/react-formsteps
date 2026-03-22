@@ -1,0 +1,118 @@
+# Utilities
+
+Helper functions exported from `@franxx/react-formsteps-core` for manual validation and schema composition.
+
+---
+
+## `validateStep`
+
+Validates raw data against a single Zod schema. Returns a structured result instead of throwing.
+
+```ts
+import { validateStep } from '@franxx/react-formsteps-core';
+
+const result = await validateStep(schema, data);
+```
+
+### Signature
+
+```ts
+function validateStep(
+  schema: ZodType,
+  data: Record<string, unknown>
+): Promise<ValidateStepResult>
+
+interface ValidateStepResult {
+  success: boolean;
+  data?: Record<string, unknown>;   // present when success === true
+  errors?: Record<string, string>;  // present when success === false
+}
+```
+
+### Example
+
+```ts
+import { z } from 'zod';
+import { validateStep } from '@franxx/react-formsteps-core';
+
+const schema = z.object({ email: z.string().email() });
+
+const result = await validateStep(schema, { email: 'not-an-email' });
+
+if (!result.success) {
+  console.log(result.errors);
+  // { email: 'Invalid email' }
+}
+```
+
+### Notes
+
+- `errors` keys are dot-separated field paths (e.g. `'address.city'` for nested schemas).
+- Never throws — always returns a `ValidateStepResult` object.
+
+---
+
+## `mergeSchemas`
+
+Merges multiple `ZodObject` schemas into a single schema. Useful for validating all accumulated form data at submit time.
+
+```ts
+import { mergeSchemas } from '@franxx/react-formsteps-core';
+
+const fullSchema = mergeSchemas([step1Schema, step2Schema, step3Schema]);
+```
+
+### Signature
+
+```ts
+function mergeSchemas(schemas: ZodType[]): ZodObject<any>
+```
+
+### Example
+
+```ts
+import { z } from 'zod';
+import { mergeSchemas } from '@franxx/react-formsteps-core';
+
+const step1 = z.object({ name: z.string() });
+const step2 = z.object({ email: z.string().email() });
+
+const fullSchema = mergeSchemas([step1, step2]);
+const result = fullSchema.safeParse({ name: 'John', email: 'john@example.com' });
+```
+
+### Notes
+
+- Only `ZodObject` schemas are merged. Other schema types (e.g. `ZodString`) are silently skipped.
+- Field names from later schemas override earlier ones if there are collisions.
+
+---
+
+## `validateAllSteps`
+
+Convenience wrapper that merges all schemas and validates the combined data in one call. Used internally by the `<Steps>` component on submit.
+
+```ts
+import { validateAllSteps } from '@franxx/react-formsteps-core';
+
+const result = await validateAllSteps(schemas, allFormData);
+```
+
+### Signature
+
+```ts
+function validateAllSteps(
+  schemas: ZodType[],
+  data: Record<string, unknown>
+): Promise<{ success: boolean; data?: Record<string, unknown>; errors?: Record<string, string> }>
+```
+
+### Example
+
+```ts
+const result = await validateAllSteps([step1Schema, step2Schema], accumulatedData);
+
+if (result.success) {
+  await submitToServer(result.data);
+}
+```

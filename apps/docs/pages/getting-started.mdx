@@ -1,0 +1,117 @@
+# Getting Started
+
+## Installation
+
+Install the core package and its peer dependencies:
+
+```bash
+pnpm add @franxx/react-formsteps-core react-hook-form zod @hookform/resolvers
+```
+
+Optionally, install the UI components package:
+
+```bash
+pnpm add @franxx/react-formsteps-ui
+```
+
+## Your first multi-step form
+
+### 1. Define your schemas
+
+Each step has its own Zod schema. Only the current step's schema is validated when the user clicks "Next".
+
+```tsx
+import { z } from 'zod';
+
+const step1 = z.object({
+  firstName: z.string().min(1, 'Required'),
+  lastName: z.string().min(1, 'Required'),
+});
+
+const step2 = z.object({
+  email: z.string().email('Enter a valid email'),
+});
+
+const step3 = z.object({
+  password: z.string().min(8),
+});
+```
+
+### 2. Use the headless hooks
+
+```tsx
+import { useSteps, useStepForm } from '@franxx/react-formsteps-core';
+
+function RegistrationForm() {
+  const schemas = [step1, step2, step3];
+  const { currentStep, next, prev, isFirst, isLast, progress, totalSteps } = useSteps({
+    totalSteps: schemas.length,
+  });
+
+  const { form, nextWithValidation, isValidating } = useStepForm({
+    schema: schemas[currentStep],
+  });
+
+  const handleNext = async () => {
+    const ok = await nextWithValidation();
+    if (ok && !isLast) next();
+    if (ok && isLast) handleSubmit(form.getValues());
+  };
+
+  return (
+    <form>
+      <div>Step {currentStep + 1} of {totalSteps}</div>
+      <progress value={progress} max={100} />
+
+      {currentStep === 0 && (
+        <>
+          <input {...form.register('firstName')} placeholder="First name" />
+          <input {...form.register('lastName')} placeholder="Last name" />
+        </>
+      )}
+      {/* ... other steps */}
+
+      <button type="button" disabled={isFirst} onClick={prev}>Back</button>
+      <button type="button" onClick={handleNext} disabled={isValidating}>
+        {isLast ? 'Submit' : 'Next'}
+      </button>
+    </form>
+  );
+}
+```
+
+### 3. (Optional) Use the UI components
+
+For a quicker setup, use the pre-built UI components:
+
+```tsx
+import { Steps, Step, StepBar, StepNav } from '@franxx/react-formsteps-ui';
+
+function RegistrationForm() {
+  return (
+    <Steps schemas={[step1, step2, step3]} onSubmit={(data) => console.log(data)}>
+      <Step title="Personal Info">
+        {/* your fields */}
+      </Step>
+      <Step title="Contact">
+        {/* your fields */}
+      </Step>
+      <Step title="Security">
+        {/* your fields */}
+      </Step>
+    </Steps>
+  );
+}
+```
+
+## TypeScript
+
+All APIs are fully typed. Enable `strict: true` in your `tsconfig.json` for the best experience.
+
+```json
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+```

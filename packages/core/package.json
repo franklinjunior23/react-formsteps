@@ -1,0 +1,45 @@
+{
+  "name": "@franxx/react-formsteps-core",
+  "version": "0.1.0",
+  "description": "Headless multi-step form logic for React",
+  "keywords": ["react", "form", "wizard", "steps", "headless"],
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "peerDependencies": {
+    "@hookform/resolvers": ">=3",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-hook-form": ">=7",
+    "zod": ">=3"
+  },
+  "devDependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.4.0",
+    "zod": "^3.22.4"
+  }
+}

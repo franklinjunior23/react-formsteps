@@ -1,0 +1,137 @@
+# Types
+
+All TypeScript types exported from `@franxx/react-formsteps-core`.
+
+```ts
+import type {
+  StepSchema,
+  StepConfig,
+  StepsContextValue,
+  StepsProviderProps,
+  UseStepsOptions,
+  UseStepsReturn,
+  UseStepFormOptions,
+  UseStepFormReturn,
+} from '@franxx/react-formsteps-core';
+```
+
+---
+
+## `StepSchema`
+
+Alias for a Zod type that resolves to a `Record<string, unknown>`. Used as the type for per-step schemas.
+
+```ts
+type StepSchema = ZodType<Record<string, unknown>>;
+```
+
+---
+
+## `StepConfig`
+
+Describes a step with an optional label and schema. Useful for building dynamic step arrays.
+
+```ts
+interface StepConfig {
+  id: string;
+  label?: string;
+  schema?: StepSchema;
+}
+```
+
+---
+
+## `UseStepsOptions`
+
+Options accepted by the `useSteps` hook.
+
+```ts
+interface UseStepsOptions {
+  totalSteps: number;
+  initialStep?: number;
+  onComplete?: () => void;
+}
+```
+
+---
+
+## `UseStepsReturn`
+
+Value returned by `useSteps`.
+
+```ts
+interface UseStepsReturn {
+  currentStep: number;
+  totalSteps: number;
+  isFirst: boolean;
+  isLast: boolean;
+  next: () => void;
+  prev: () => void;
+  goTo: (index: number) => void;
+  progress: number;
+}
+```
+
+---
+
+## `UseStepFormOptions`
+
+Options accepted by the `useStepForm` hook.
+
+```ts
+interface UseStepFormOptions<TSchema extends ZodType = ZodType> {
+  schema: TSchema;
+  defaultValues?: Partial<z.infer<TSchema>>;
+  onNext?: (data: z.infer<TSchema>) => void;
+}
+```
+
+---
+
+## `UseStepFormReturn`
+
+Value returned by `useStepForm`.
+
+```ts
+interface UseStepFormReturn<TSchema extends ZodType = ZodType> {
+  form: UseFormReturn<z.infer<TSchema>>;
+  nextWithValidation: () => Promise<boolean>;
+  isValidating: boolean;
+}
+```
+
+---
+
+## `StepsContextValue`
+
+Shape of the value provided by `StepsContext`. This is what `useStepsContext()` returns.
+
+```ts
+interface StepsContextValue {
+  currentStep: number;
+  totalSteps: number;
+  isFirst: boolean;
+  isLast: boolean;
+  next: () => void;
+  prev: () => void;
+  goTo: (index: number) => void;
+  formData: Record<string, unknown>;
+  setStepData: (step: number, data: Record<string, unknown>) => void;
+  schemas: StepSchema[];
+}
+```
+
+---
+
+## `StepsProviderProps`
+
+Props accepted by the `StepsProvider` component.
+
+```ts
+interface StepsProviderProps {
+  children: React.ReactNode;
+  schemas: StepSchema[];
+  onSubmit?: (data: Record<string, unknown>) => void;
+  initialStep?: number;
+}
+```
