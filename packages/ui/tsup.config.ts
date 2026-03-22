@@ -10,5 +10,5 @@ export default defineConfig({
   outExtension({ format }) {
     return { js: format === 'esm' ? '.mjs' : '.js' };
   },
-  external: ['react', 'react-dom', 'react-hook-form', 'zod', '@franxx/react-formsteps-core'],
+  external: ['react', 'react-dom', 'react-hook-form', 'zod', '@franklinjunior23/react-formsteps-core'],
 });

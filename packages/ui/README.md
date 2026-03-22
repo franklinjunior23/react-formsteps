@@ -1,8 +1,8 @@
-# @franxx/react-formsteps-ui
+# @franklinjunior23/react-formsteps-ui
 
-> Pre-built React components for [react-formsteps](https://github.com/franklinjunior23/react-formsteps). Optional layer on top of [`@franxx/react-formsteps-core`](https://www.npmjs.com/package/@franxx/react-formsteps-core).
+> Pre-built React components for [react-formsteps](https://github.com/franklinjunior23/react-formsteps). Optional layer on top of [`@franklinjunior23/react-formsteps-core`](https://www.npmjs.com/package/@franklinjunior23/react-formsteps-core).
 
-[![npm version](https://img.shields.io/npm/v/@franxx/react-formsteps-ui?style=flat-square&color=blue)](https://www.npmjs.com/package/@franxx/react-formsteps-ui)
+[![npm version](https://img.shields.io/npm/v/@franklinjunior23/react-formsteps-ui?style=flat-square&color=blue)](https://www.npmjs.com/package/@franklinjunior23/react-formsteps-ui)
 [![license](https://img.shields.io/badge/license-Custom-orange?style=flat-square)](./LICENSE)
 
 ---
@@ -10,13 +10,13 @@
 ## Installation
 
 ```bash
-pnpm add @franxx/react-formsteps-core @franxx/react-formsteps-ui react-hook-form zod @hookform/resolvers
+pnpm add @franklinjunior23/react-formsteps-core @franklinjunior23/react-formsteps-ui react-hook-form zod @hookform/resolvers
 ```
 
 ## Usage
 
 ```tsx
-import { Steps, Step, StepBar, StepNav } from '@franxx/react-formsteps-ui';
+import { Steps, Step, StepBar, StepNav } from '@franklinjunior23/react-formsteps-ui';
 import { z } from 'zod';
 
 const schema1 = z.object({ name: z.string().min(1) });

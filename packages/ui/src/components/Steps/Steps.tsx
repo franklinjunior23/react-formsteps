@@ -4,7 +4,7 @@ import {
   StepsContextValue,
   StepSchema,
   useSteps,
-} from '@franxx/react-formsteps-core';
+} from '@franklinjunior23/react-formsteps-core';
 
 export interface StepsProps {
   children: React.ReactNode;

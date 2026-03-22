@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { useStepsContext } from '@franxx/react-formsteps-core';
-import { validateStep } from '@franxx/react-formsteps-core';
+import { useStepsContext } from '@franklinjunior23/react-formsteps-core';
+import { validateStep } from '@franklinjunior23/react-formsteps-core';
 
 export interface StepNavProps {
   onBeforeNext?: () => Promise<boolean> | boolean;

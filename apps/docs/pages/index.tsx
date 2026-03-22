@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const INSTALL_CMD = 'pnpm add @franxx/react-formsteps-core react-hook-form zod @hookform/resolvers';
+const INSTALL_CMD = 'pnpm add @franklinjunior23/react-formsteps-core react-hook-form zod @hookform/resolvers';
 
 // One Dark theme tokens
 const kw = (s: string) => <span style={{ color: '#c678dd' }}>{s}</span>; // keyword / operator
@@ -33,7 +33,7 @@ function CodeExample() {
         {tx(', ')}
         {fn('useStepForm')}
         {' } '}
-        {kw('from')} {str("'@franxx/react-formsteps-core'")}
+        {kw('from')} {str("'@franklinjunior23/react-formsteps-core'")}
         {tx(';')}
         {'\n'}
         {/* line 2 */}
@@ -656,7 +656,7 @@ export default function LandingPage() {
           >
             <span style={{ color: '#a6e3a1' }}>pnpm</span>{' '}
             <span style={{ color: '#89dceb' }}>add</span>{' '}
-            <span style={{ color: '#cdd6f4' }}>@franxx/react-formsteps-core</span>
+            <span style={{ color: '#cdd6f4' }}>@franklinjunior23/react-formsteps-core</span>
           </code>
           <button
             onClick={handleCopy}

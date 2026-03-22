@@ -1,5 +1,5 @@
 {
-  "name": "@franxx/playground",
+  "name": "@franklinjunior23/playground",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -10,8 +10,8 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
-    "@franxx/react-formsteps-core": "workspace:*",
-    "@franxx/react-formsteps-ui": "workspace:*",
+    "@franklinjunior23/react-formsteps-core": "workspace:*",
+    "@franklinjunior23/react-formsteps-ui": "workspace:*",
     "@hookform/resolvers": "^3.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

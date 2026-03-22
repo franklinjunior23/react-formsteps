@@ -66,10 +66,10 @@ importers:
 
   apps/playground:
     dependencies:
-      '@franxx/react-formsteps-core':
+      '@franklinjunior23/react-formsteps-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@franxx/react-formsteps-ui':
+      '@franklinjunior23/react-formsteps-ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@hookform/resolvers':
@@ -151,7 +151,7 @@ importers:
 
   packages/ui:
     dependencies:
-      '@franxx/react-formsteps-core':
+      '@franklinjunior23/react-formsteps-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
