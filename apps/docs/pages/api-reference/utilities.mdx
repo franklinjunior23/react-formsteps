@@ -1,6 +1,6 @@
 # Utilities
 
-Helper functions exported from `@franxx/react-formsteps-core` for manual validation and schema composition.
+Helper functions exported from `react-formsteps-core` for manual validation and schema composition.
 
 ---
 
@@ -9,7 +9,7 @@ Helper functions exported from `@franxx/react-formsteps-core` for manual validat
 Validates raw data against a single Zod schema. Returns a structured result instead of throwing.
 
 ```ts
-import { validateStep } from '@franxx/react-formsteps-core';
+import { validateStep } from 'react-formsteps-core';
 
 const result = await validateStep(schema, data);
 ```
@@ -33,7 +33,7 @@ interface ValidateStepResult {
 
 ```ts
 import { z } from 'zod';
-import { validateStep } from '@franxx/react-formsteps-core';
+import { validateStep } from 'react-formsteps-core';
 
 const schema = z.object({ email: z.string().email() });
 
@@ -57,7 +57,7 @@ if (!result.success) {
 Merges multiple `ZodObject` schemas into a single schema. Useful for validating all accumulated form data at submit time.
 
 ```ts
-import { mergeSchemas } from '@franxx/react-formsteps-core';
+import { mergeSchemas } from 'react-formsteps-core';
 
 const fullSchema = mergeSchemas([step1Schema, step2Schema, step3Schema]);
 ```
@@ -72,7 +72,7 @@ function mergeSchemas(schemas: ZodType[]): ZodObject<any>
 
 ```ts
 import { z } from 'zod';
-import { mergeSchemas } from '@franxx/react-formsteps-core';
+import { mergeSchemas } from 'react-formsteps-core';
 
 const step1 = z.object({ name: z.string() });
 const step2 = z.object({ email: z.string().email() });
@@ -93,7 +93,7 @@ const result = fullSchema.safeParse({ name: 'John', email: 'john@example.com' })
 Convenience wrapper that merges all schemas and validates the combined data in one call. Used internally by the `<Steps>` component on submit.
 
 ```ts
-import { validateAllSteps } from '@franxx/react-formsteps-core';
+import { validateAllSteps } from 'react-formsteps-core';
 
 const result = await validateAllSteps(schemas, allFormData);
 ```

@@ -9,7 +9,7 @@ The steps context lets any component deep in the tree access and control the wiz
 Reads the current steps context. Must be called inside a `<Steps>` provider or a `<StepsProvider>`.
 
 ```ts
-import { useStepsContext } from '@franxx/react-formsteps-core';
+import { useStepsContext } from 'react-formsteps-core';
 
 const {
   currentStep,
@@ -51,7 +51,7 @@ const {
 Headless context provider for use without the UI components package. Gives full access to the context without rendering any UI.
 
 ```tsx
-import { StepsProvider, useStepsContext } from '@franxx/react-formsteps-core';
+import { StepsProvider, useStepsContext } from 'react-formsteps-core';
 
 function App() {
   return (
@@ -82,5 +82,5 @@ function MyCustomWizard() {
 | | `StepsProvider` (core) | `<Steps>` (ui) |
 |--|------------------------|----------------|
 | Renders UI | No — headless | Yes — wraps children in a div |
-| Requires `@franxx/react-formsteps-ui` | No | Yes |
+| Requires `react-formsteps-ui` | No | Yes |
 | Use case | Custom UI, existing design systems | Quick start with pre-built components |

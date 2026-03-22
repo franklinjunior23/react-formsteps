@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSteps } from '@franklinjunior23/react-formsteps-core';
+import { useSteps } from 'react-formsteps-core';
 import { FormField, SuccessScreen, cardStyle, btnPrimary, btnSecondary } from '../shared';
 
 const step1Schema = z.object({

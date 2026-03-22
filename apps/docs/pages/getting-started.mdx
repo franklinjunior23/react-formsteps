@@ -5,13 +5,13 @@
 Install the core package and its peer dependencies:
 
 ```bash
-pnpm add @franxx/react-formsteps-core react-hook-form zod @hookform/resolvers
+pnpm add react-formsteps-core react-hook-form zod @hookform/resolvers
 ```
 
 Optionally, install the UI components package:
 
 ```bash
-pnpm add @franxx/react-formsteps-ui
+pnpm add react-formsteps-ui
 ```
 
 ## Your first multi-step form
@@ -40,7 +40,7 @@ const step3 = z.object({
 ### 2. Use the headless hooks
 
 ```tsx
-import { useSteps, useStepForm } from '@franxx/react-formsteps-core';
+import { useSteps, useStepForm } from 'react-formsteps-core';
 
 function RegistrationForm() {
   const schemas = [step1, step2, step3];
@@ -85,7 +85,7 @@ function RegistrationForm() {
 For a quicker setup, use the pre-built UI components:
 
 ```tsx
-import { Steps, Step, StepBar, StepNav } from '@franxx/react-formsteps-ui';
+import { Steps, Step, StepBar, StepNav } from 'react-formsteps-ui';
 
 function RegistrationForm() {
   return (

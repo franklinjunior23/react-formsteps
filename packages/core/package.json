@@ -1,5 +1,5 @@
 {
-  "name": "@franklinjunior23/react-formsteps-core",
+  "name": "react-formsteps-core",
   "version": "0.1.0",
   "description": "Headless multi-step form logic for React",
   "keywords": [

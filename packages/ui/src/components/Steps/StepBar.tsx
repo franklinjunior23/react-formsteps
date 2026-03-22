@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStepsContext } from '@franklinjunior23/react-formsteps-core';
+import { useStepsContext } from 'react-formsteps-core';
 
 export interface StepBarProps {
   className?: string;

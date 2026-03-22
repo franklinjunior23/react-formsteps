@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const INSTALL_CMD = 'pnpm add @franklinjunior23/react-formsteps-core react-hook-form zod @hookform/resolvers';
+const INSTALL_CMD = 'pnpm add react-formsteps-core react-hook-form zod @hookform/resolvers';
 
 // One Dark theme tokens
 const kw = (s: string) => <span style={{ color: '#c678dd' }}>{s}</span>; // keyword / operator
@@ -33,7 +33,7 @@ function CodeExample() {
         {tx(', ')}
         {fn('useStepForm')}
         {' } '}
-        {kw('from')} {str("'@franklinjunior23/react-formsteps-core'")}
+        {kw('from')} {str("'react-formsteps-core'")}
         {tx(';')}
         {'\n'}
         {/* line 2 */}
@@ -507,7 +507,7 @@ export default function LandingPage() {
             API
           </Link>
           <a
-            href="https://github.com/franxx/react-formsteps"
+            href="https://github.com/franklinjunior23/react-formsteps"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -656,7 +656,7 @@ export default function LandingPage() {
           >
             <span style={{ color: '#a6e3a1' }}>pnpm</span>{' '}
             <span style={{ color: '#89dceb' }}>add</span>{' '}
-            <span style={{ color: '#cdd6f4' }}>@franklinjunior23/react-formsteps-core</span>
+            <span style={{ color: '#cdd6f4' }}>react-formsteps-core</span>
           </code>
           <button
             onClick={handleCopy}
@@ -1173,7 +1173,7 @@ export default function LandingPage() {
             API
           </Link>
           <a
-            href="https://github.com/franxx/react-formsteps"
+            href="https://github.com/franklinjunior23/react-formsteps"
             style={{ color: '#9ca3af', textDecoration: 'none' }}
             target="_blank"
             rel="noopener noreferrer"

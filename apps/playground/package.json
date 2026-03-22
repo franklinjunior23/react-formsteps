@@ -10,8 +10,8 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
-    "@franklinjunior23/react-formsteps-core": "workspace:*",
-    "@franklinjunior23/react-formsteps-ui": "workspace:*",
+    "react-formsteps-core": "workspace:*",
+    "react-formsteps-ui": "workspace:*",
     "@hookform/resolvers": "^3.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

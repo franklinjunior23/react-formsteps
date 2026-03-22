@@ -3,7 +3,7 @@
 Integrates `react-hook-form` with per-step Zod validation. Validates only the current step's schema before allowing the user to advance.
 
 ```ts
-import { useStepForm } from '@franxx/react-formsteps-core';
+import { useStepForm } from 'react-formsteps-core';
 import { z } from 'zod';
 
 const schema = z.object({ email: z.string().email() });
@@ -34,7 +34,7 @@ const {
 ## Example
 
 ```tsx
-import { useSteps, useStepForm } from '@franxx/react-formsteps-core';
+import { useSteps, useStepForm } from 'react-formsteps-core';
 import { z } from 'zod';
 
 const schemas = [

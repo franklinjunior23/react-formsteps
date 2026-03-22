@@ -1,9 +1,9 @@
 # UI Components
 
-Pre-built React components from `@franxx/react-formsteps-ui`. All components consume the `StepsContext` internally — they must be used inside a `<Steps>` provider.
+Pre-built React components from `react-formsteps-ui`. All components consume the `StepsContext` internally — they must be used inside a `<Steps>` provider.
 
 ```bash
-pnpm add @franxx/react-formsteps-ui
+pnpm add react-formsteps-ui
 ```
 
 ---
@@ -13,7 +13,7 @@ pnpm add @franxx/react-formsteps-ui
 Root provider component. Manages all step state and exposes it via context to child components.
 
 ```tsx
-import { Steps, Step } from '@franxx/react-formsteps-ui';
+import { Steps, Step } from 'react-formsteps-ui';
 
 <Steps schemas={[schema1, schema2, schema3]} onSubmit={(data) => console.log(data)}>
   <Step>...</Step>
@@ -63,7 +63,7 @@ Wrapper for each step's content. Renders its children with an optional heading.
 Visual progress bar. Reads current step from context automatically.
 
 ```tsx
-import { StepBar } from '@franxx/react-formsteps-ui';
+import { StepBar } from 'react-formsteps-ui';
 
 <StepBar showLabels labels={['Info', 'Contact', 'Password']} />
 ```
@@ -88,7 +88,7 @@ import { StepBar } from '@franxx/react-formsteps-ui';
 Navigation buttons (Back / Next / Submit). Validates the current step's schema before advancing.
 
 ```tsx
-import { StepNav } from '@franxx/react-formsteps-ui';
+import { StepNav } from 'react-formsteps-ui';
 
 <StepNav
   nextLabel="Continue"

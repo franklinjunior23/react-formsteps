@@ -2,8 +2,8 @@
 
 > Headless, type-safe multi-step form library for React — built on [react-hook-form](https://react-hook-form.com/) and [Zod](https://zod.dev/).
 
-[![npm version](https://img.shields.io/npm/v/@franklinjunior23/react-formsteps-core?style=flat-square&color=blue)](https://www.npmjs.com/package/@franklinjunior23/react-formsteps-core)
-[![npm version](https://img.shields.io/npm/v/@franklinjunior23/react-formsteps-ui?style=flat-square&color=blue)](https://www.npmjs.com/package/@franklinjunior23/react-formsteps-ui)
+[![npm version](https://img.shields.io/npm/v/react-formsteps-core?style=flat-square&color=blue)](https://www.npmjs.com/package/react-formsteps-core)
+[![npm version](https://img.shields.io/npm/v/react-formsteps-ui?style=flat-square&color=blue)](https://www.npmjs.com/package/react-formsteps-ui)
 [![license](https://img.shields.io/badge/license-Custom-orange?style=flat-square)](./LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 
@@ -13,8 +13,8 @@
 
 | Package                                           | Version                                                                             | Description                                 |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------- |
-| [`@franklinjunior23/react-formsteps-core`](./packages/core) | ![npm](https://img.shields.io/npm/v/@franklinjunior23/react-formsteps-core?style=flat-square) | Headless hooks + context. No UI, no styles. |
-| [`@franklinjunior23/react-formsteps-ui`](./packages/ui)     | ![npm](https://img.shields.io/npm/v/@franklinjunior23/react-formsteps-ui?style=flat-square)   | Optional pre-built React components.        |
+| [`react-formsteps-core`](./packages/core) | ![npm](https://img.shields.io/npm/v/react-formsteps-core?style=flat-square) | Headless hooks + context. No UI, no styles. |
+| [`react-formsteps-ui`](./packages/ui)     | ![npm](https://img.shields.io/npm/v/react-formsteps-ui?style=flat-square)   | Optional pre-built React components.        |
 
 ---
 
@@ -35,23 +35,23 @@
 
 ```bash
 # npm
-npm install @franklinjunior23/react-formsteps-core react-hook-form zod @hookform/resolvers
+npm install react-formsteps-core react-hook-form zod @hookform/resolvers
 
 # pnpm
-pnpm add @franklinjunior23/react-formsteps-core react-hook-form zod @hookform/resolvers
+pnpm add react-formsteps-core react-hook-form zod @hookform/resolvers
 
 # yarn
-yarn add @franklinjunior23/react-formsteps-core react-hook-form zod @hookform/resolvers
+yarn add react-formsteps-core react-hook-form zod @hookform/resolvers
 ```
 
 ### With UI components
 
 ```bash
 # npm
-npm install @franklinjunior23/react-formsteps-core @franklinjunior23/react-formsteps-ui react-hook-form zod @hookform/resolvers
+npm install react-formsteps-core react-formsteps-ui react-hook-form zod @hookform/resolvers
 
 # pnpm
-pnpm add @franklinjunior23/react-formsteps-core @franklinjunior23/react-formsteps-ui react-hook-form zod @hookform/resolvers
+pnpm add react-formsteps-core react-formsteps-ui react-hook-form zod @hookform/resolvers
 ```
 
 ### Peer dependencies
@@ -71,7 +71,7 @@ pnpm add @franklinjunior23/react-formsteps-core @franklinjunior23/react-formstep
 ### Headless — `useSteps` + `useStepForm`
 
 ```tsx
-import { useSteps, useStepForm } from '@franklinjunior23/react-formsteps-core';
+import { useSteps, useStepForm } from 'react-formsteps-core';
 import { z } from 'zod';
 
 const schemas = [
@@ -137,7 +137,7 @@ export function RegistrationForm() {
 ### With UI components — `<Steps>` + `<Step>`
 
 ```tsx
-import { Steps, Step, StepBar, StepNav } from '@franklinjunior23/react-formsteps-ui';
+import { Steps, Step, StepBar, StepNav } from 'react-formsteps-ui';
 import { z } from 'zod';
 
 const schema1 = z.object({ name: z.string().min(1, 'Required') });
@@ -214,7 +214,7 @@ const {
 Access step state from any component inside a `<Steps>` or `<StepsProvider>`.
 
 ```ts
-import { useStepsContext } from '@franklinjunior23/react-formsteps-core';
+import { useStepsContext } from 'react-formsteps-core';
 
 const { currentStep, totalSteps, next, prev, goTo, formData } = useStepsContext();
 ```
@@ -226,7 +226,7 @@ const { currentStep, totalSteps, next, prev, goTo, formData } = useStepsContext(
 Use the context without the UI package.
 
 ```tsx
-import { StepsProvider, useStepsContext } from '@franklinjunior23/react-formsteps-core';
+import { StepsProvider, useStepsContext } from 'react-formsteps-core';
 
 <StepsProvider schemas={[schema1, schema2]} onSubmit={handleSubmit}>
   <MyCustomWizard />
@@ -238,7 +238,7 @@ import { StepsProvider, useStepsContext } from '@franklinjunior23/react-formstep
 ### Utilities
 
 ```ts
-import { validateStep, mergeSchemas, validateAllSteps } from '@franklinjunior23/react-formsteps-core';
+import { validateStep, mergeSchemas, validateAllSteps } from 'react-formsteps-core';
 
 // Validate a single step — never throws
 const result = await validateStep(schema, data);
@@ -288,7 +288,7 @@ import type {
   UseStepFormOptions,
   UseStepFormReturn,
   StepsProviderProps,
-} from '@franklinjunior23/react-formsteps-core';
+} from 'react-formsteps-core';
 ```
 
 ---

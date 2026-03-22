@@ -16,7 +16,7 @@ export default function App() {
     <div style={{ minHeight: '100vh', padding: '2rem' }}>
       <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <h1 style={{ fontSize: '2rem', fontWeight: 700 }}>react-formsteps playground</h1>
-        <p style={{ color: '#6b7280' }}>Interactive examples of @franklinjunior23/react-formsteps</p>
+        <p style={{ color: '#6b7280' }}>Interactive examples of react-formsteps</p>
       </header>
 
       <div
