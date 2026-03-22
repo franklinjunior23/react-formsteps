@@ -3,7 +3,6 @@ import {
   StepsContext,
   StepsContextValue,
   StepSchema,
-  validateAllSteps,
   useSteps,
 } from '@franxx/react-formsteps-core';
 
@@ -15,7 +14,7 @@ export interface StepsProps {
   className?: string;
 }
 
-export function Steps({ children, schemas, onSubmit, initialStep = 0, className }: StepsProps) {
+export function Steps({ children, schemas, initialStep = 0, className }: StepsProps) {
   const childArray = React.Children.toArray(children);
   const totalStepsCount = childArray.length;
 
@@ -33,25 +32,12 @@ export function Steps({ children, schemas, onSubmit, initialStep = 0, className 
 
   const [formData, setFormData] = useState<Record<string, unknown>>({});
 
-  const handleSubmit = useCallback(
-    async (data: Record<string, unknown>) => {
-      const result = await validateAllSteps(schemas, data);
-      if (result.success && result.data) {
-        onSubmit?.(result.data);
-      }
-    },
-    [schemas, onSubmit]
-  );
-
-  const setStepData = useCallback(
-    (_step: number, data: Record<string, unknown>) => {
-      setFormData((prev) => {
-        const merged = { ...prev, ...data };
-        return merged;
-      });
-    },
-    []
-  );
+  const setStepData = useCallback((_step: number, data: Record<string, unknown>) => {
+    setFormData((prev) => {
+      const merged = { ...prev, ...data };
+      return merged;
+    });
+  }, []);
 
   const contextValue: StepsContextValue = useMemo(
     () => ({
@@ -71,9 +57,7 @@ export function Steps({ children, schemas, onSubmit, initialStep = 0, className 
 
   return (
     <StepsContext.Provider value={contextValue}>
-      <div className={className ?? 'w-full max-w-xl mx-auto'}>
-        {childArray[currentStep]}
-      </div>
+      <div className={className ?? 'w-full max-w-xl mx-auto'}>{childArray[currentStep]}</div>
     </StepsContext.Provider>
   );
 }

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { StepsContextValue, StepsProviderProps } from '../types';
-import { validateAllSteps } from '../utils/mergeSchemas';
 
 export const StepsContext = createContext<StepsContextValue | null>(null);
 
@@ -12,12 +11,7 @@ export function useStepsContext(): StepsContextValue {
   return ctx;
 }
 
-export function StepsProvider({
-  children,
-  schemas,
-  onSubmit,
-  initialStep = 0,
-}: StepsProviderProps) {
+export function StepsProvider({ children, schemas, initialStep = 0 }: StepsProviderProps) {
   // We derive totalSteps from schemas length for headless usage
   const totalSteps = schemas.length;
   const [currentStep, setCurrentStep] = useState(initialStep);
@@ -38,13 +32,6 @@ export function StepsProvider({
   const setStepData = useCallback((_step: number, data: Record<string, unknown>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   }, []);
-
-  const handleSubmit = useCallback(async () => {
-    const result = await validateAllSteps(schemas, formData);
-    if (result.success && result.data) {
-      onSubmit?.(result.data);
-    }
-  }, [schemas, formData, onSubmit]);
 
   const contextValue: StepsContextValue = useMemo(
     () => ({

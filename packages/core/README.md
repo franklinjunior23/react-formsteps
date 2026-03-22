@@ -11,10 +11,10 @@
 
 ## Packages
 
-| Package | Version | Description |
-|---------|---------|-------------|
+| Package                                           | Version                                                                             | Description                                 |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------- |
 | [`@franxx/react-formsteps-core`](./packages/core) | ![npm](https://img.shields.io/npm/v/@franxx/react-formsteps-core?style=flat-square) | Headless hooks + context. No UI, no styles. |
-| [`@franxx/react-formsteps-ui`](./packages/ui) | ![npm](https://img.shields.io/npm/v/@franxx/react-formsteps-ui?style=flat-square) | Optional pre-built React components. |
+| [`@franxx/react-formsteps-ui`](./packages/ui)     | ![npm](https://img.shields.io/npm/v/@franxx/react-formsteps-ui?style=flat-square)   | Optional pre-built React components.        |
 
 ---
 
@@ -56,13 +56,13 @@ pnpm add @franxx/react-formsteps-core @franxx/react-formsteps-ui react-hook-form
 
 ### Peer dependencies
 
-| Dependency | Version |
-|-----------|---------|
-| `react` | `>=18` |
-| `react-dom` | `>=18` |
-| `react-hook-form` | `>=7` |
-| `zod` | `>=3` |
-| `@hookform/resolvers` | `>=3` |
+| Dependency            | Version |
+| --------------------- | ------- |
+| `react`               | `>=18`  |
+| `react-dom`           | `>=18`  |
+| `react-hook-form`     | `>=7`   |
+| `zod`                 | `>=3`   |
+| `@hookform/resolvers` | `>=3`   |
 
 ---
 
@@ -99,7 +99,9 @@ export function RegistrationForm() {
   return (
     <form>
       {/* Progress */}
-      <div>Step {currentStep + 1} of {totalSteps} — {progress}%</div>
+      <div>
+        Step {currentStep + 1} of {totalSteps} — {progress}%
+      </div>
       <progress value={progress} max={100} />
 
       {/* Step 1 */}
@@ -111,9 +113,7 @@ export function RegistrationForm() {
       )}
 
       {/* Step 2 */}
-      {currentStep === 1 && (
-        <input {...form.register('email')} placeholder="Email" />
-      )}
+      {currentStep === 1 && <input {...form.register('email')} placeholder="Email" />}
 
       {/* Step 3 */}
       {currentStep === 2 && (
@@ -121,7 +121,9 @@ export function RegistrationForm() {
       )}
 
       {/* Navigation */}
-      <button type="button" onClick={prev} disabled={isFirst}>Back</button>
+      <button type="button" onClick={prev} disabled={isFirst}>
+        Back
+      </button>
       <button type="button" onClick={handleNext} disabled={isValidating}>
         {isLast ? 'Submit' : 'Next'}
       </button>
@@ -148,17 +150,11 @@ export function RegistrationForm() {
       schemas={[schema1, schema2, schema3]}
       onSubmit={(data) => console.log('Submitted:', data)}
     >
-      <Step title="Personal info">
-        {/* your fields */}
-      </Step>
+      <Step title="Personal info">{/* your fields */}</Step>
 
-      <Step title="Contact">
-        {/* your fields */}
-      </Step>
+      <Step title="Contact">{/* your fields */}</Step>
 
-      <Step title="Security">
-        {/* your fields */}
-      </Step>
+      <Step title="Security">{/* your fields */}</Step>
     </Steps>
   );
 }
@@ -185,11 +181,11 @@ const {
 } = useSteps({ totalSteps: 3, initialStep?: 0, onComplete?: () => void });
 ```
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `totalSteps` | `number` | — | **Required.** Must be a positive integer |
-| `initialStep` | `number` | `0` | Starting step index |
-| `onComplete` | `() => void` | — | Called once when the user first arrives at the last step |
+| Option        | Type         | Default | Description                                              |
+| ------------- | ------------ | ------- | -------------------------------------------------------- |
+| `totalSteps`  | `number`     | —       | **Required.** Must be a positive integer                 |
+| `initialStep` | `number`     | `0`     | Starting step index                                      |
+| `onComplete`  | `() => void` | —       | Called once when the user first arrives at the last step |
 
 ---
 
@@ -205,11 +201,11 @@ const {
 } = useStepForm({ schema, defaultValues?, onNext? });
 ```
 
-| Option | Type | Description |
-|--------|------|-------------|
-| `schema` | `ZodType` | **Required.** Zod schema for the current step |
-| `defaultValues` | `Partial<z.infer<TSchema>>` | Initial field values |
-| `onNext` | `(data) => void` | Called with validated data when advancing |
+| Option          | Type                        | Description                                   |
+| --------------- | --------------------------- | --------------------------------------------- |
+| `schema`        | `ZodType`                   | **Required.** Zod schema for the current step |
+| `defaultValues` | `Partial<z.infer<TSchema>>` | Initial field values                          |
+| `onNext`        | `(data) => void`            | Called with validated data when advancing     |
 
 ---
 
@@ -234,7 +230,7 @@ import { StepsProvider, useStepsContext } from '@franxx/react-formsteps-core';
 
 <StepsProvider schemas={[schema1, schema2]} onSubmit={handleSubmit}>
   <MyCustomWizard />
-</StepsProvider>
+</StepsProvider>;
 ```
 
 ---
@@ -259,11 +255,11 @@ const result = await validateAllSteps(schemas, allData);
 
 ### UI Components
 
-| Component | Description |
-|-----------|-------------|
-| `<Steps>` | Root provider. Pass `schemas` and `onSubmit`. |
-| `<Step>` | Wrapper for each step's content. Accepts optional `title`. |
-| `<StepBar>` | Progress bar with optional step labels. |
+| Component   | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `<Steps>`   | Root provider. Pass `schemas` and `onSubmit`.               |
+| `<Step>`    | Wrapper for each step's content. Accepts optional `title`.  |
+| `<StepBar>` | Progress bar with optional step labels.                     |
 | `<StepNav>` | Back / Next / Submit buttons with built-in validation gate. |
 
 ---

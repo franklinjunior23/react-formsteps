@@ -47,12 +47,13 @@ export function ConditionalForm() {
       const valid = await form1.trigger();
       if (!valid) return;
       // When account type changes, reset step 2 data to avoid stale fields
-      const prevType = (allData.accountType as string | undefined);
+      const prevType = allData.accountType as string | undefined;
       const newType = form1.getValues().accountType;
       if (prevType && prevType !== newType) {
         personalForm.reset();
         businessForm.reset();
         setAllData((p) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { fullName, birthDate, companyName, taxId, ...rest } = p as Record<string, unknown>;
           return { ...rest, ...form1.getValues() };
         });
@@ -82,11 +83,7 @@ export function ConditionalForm() {
 
   if (submitted) return <SuccessScreen data={allData} onReset={handleReset} />;
 
-  const stepLabels = [
-    'Account Type',
-    isPersonal ? 'Personal Info' : 'Business Info',
-    'Contact',
-  ];
+  const stepLabels = ['Account Type', isPersonal ? 'Personal Info' : 'Business Info', 'Contact'];
 
   return (
     <div style={cardStyle}>
@@ -199,7 +196,11 @@ export function ConditionalForm() {
         <>
           <FormField
             label="Email"
-            inputProps={{ ...form3.register('email'), type: 'email', placeholder: 'you@example.com' }}
+            inputProps={{
+              ...form3.register('email'),
+              type: 'email',
+              placeholder: 'you@example.com',
+            }}
             error={form3.formState.errors.email?.message}
           />
           <FormField
@@ -215,7 +216,11 @@ export function ConditionalForm() {
           type="button"
           onClick={prev}
           disabled={isFirst}
-          style={{ ...btnSecondary, opacity: isFirst ? 0.4 : 1, cursor: isFirst ? 'not-allowed' : 'pointer' }}
+          style={{
+            ...btnSecondary,
+            opacity: isFirst ? 0.4 : 1,
+            cursor: isFirst ? 'not-allowed' : 'pointer',
+          }}
         >
           Back
         </button>

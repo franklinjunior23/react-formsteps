@@ -127,7 +127,11 @@ export function BasicForm() {
       {currentStep === 1 && (
         <FormField
           label="Email Address"
-          inputProps={{ ...form2.register('email'), type: 'email', placeholder: 'john@example.com' }}
+          inputProps={{
+            ...form2.register('email'),
+            type: 'email',
+            placeholder: 'john@example.com',
+          }}
           error={e2.email?.message}
         />
       )}
@@ -136,12 +140,20 @@ export function BasicForm() {
         <>
           <FormField
             label="Password"
-            inputProps={{ ...form3.register('password'), type: 'password', placeholder: 'Min. 8 characters' }}
+            inputProps={{
+              ...form3.register('password'),
+              type: 'password',
+              placeholder: 'Min. 8 characters',
+            }}
             error={e3.password?.message}
           />
           <FormField
             label="Confirm Password"
-            inputProps={{ ...form3.register('confirmPassword'), type: 'password', placeholder: 'Repeat password' }}
+            inputProps={{
+              ...form3.register('confirmPassword'),
+              type: 'password',
+              placeholder: 'Repeat password',
+            }}
             error={e3.confirmPassword?.message}
           />
         </>
@@ -152,7 +164,11 @@ export function BasicForm() {
           type="button"
           onClick={prev}
           disabled={isFirst}
-          style={{ ...btnSecondary, opacity: isFirst ? 0.4 : 1, cursor: isFirst ? 'not-allowed' : 'pointer' }}
+          style={{
+            ...btnSecondary,
+            opacity: isFirst ? 0.4 : 1,
+            cursor: isFirst ? 'not-allowed' : 'pointer',
+          }}
         >
           Back
         </button>

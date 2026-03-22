@@ -2,7 +2,13 @@
   "name": "@franxx/react-formsteps-core",
   "version": "0.1.0",
   "description": "Headless multi-step form logic for React",
-  "keywords": ["react", "form", "wizard", "steps", "headless"],
+  "keywords": [
+    "react",
+    "form",
+    "wizard",
+    "steps",
+    "headless"
+  ],
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -14,7 +20,9 @@
       "require": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -34,6 +42,8 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@vitest/coverage-v8": "^4.1.0",
+    "jsdom": "^29.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",

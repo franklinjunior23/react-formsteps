@@ -19,7 +19,9 @@ export default function App() {
         <p style={{ color: '#6b7280' }}>Interactive examples of @franxx/react-formsteps</p>
       </header>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '2rem' }}
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}

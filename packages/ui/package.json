@@ -2,7 +2,13 @@
   "name": "@franxx/react-formsteps-ui",
   "version": "0.1.0",
   "description": "UI components for react-formsteps",
-  "keywords": ["react", "form", "wizard", "steps", "ui"],
+  "keywords": [
+    "react",
+    "form",
+    "wizard",
+    "steps",
+    "ui"
+  ],
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -14,7 +20,9 @@
       "require": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

@@ -25,12 +25,8 @@ const schema2 = z.object({ email: z.string().email() });
 export function MyForm() {
   return (
     <Steps schemas={[schema1, schema2]} onSubmit={(data) => console.log(data)}>
-      <Step title="Personal info">
-        {/* your fields */}
-      </Step>
-      <Step title="Contact">
-        {/* your fields */}
-      </Step>
+      <Step title="Personal info">{/* your fields */}</Step>
+      <Step title="Contact">{/* your fields */}</Step>
     </Steps>
   );
 }
@@ -38,11 +34,11 @@ export function MyForm() {
 
 ## Components
 
-| Component | Description |
-|-----------|-------------|
-| `<Steps>` | Root provider. Manages all state and context. |
-| `<Step>` | Wrapper for each step's content. |
-| `<StepBar>` | Animated progress bar with optional step labels. |
+| Component   | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| `<Steps>`   | Root provider. Manages all state and context.          |
+| `<Step>`    | Wrapper for each step's content.                       |
+| `<StepBar>` | Animated progress bar with optional step labels.       |
 | `<StepNav>` | Back / Next / Submit buttons with built-in validation. |
 
 For full documentation see the [main README](https://github.com/franklinjunior23/react-formsteps#readme) or the [API reference](https://github.com/franklinjunior23/react-formsteps/blob/main/apps/docs/pages/api-reference/components.mdx).

@@ -10,5 +10,12 @@ export default defineConfig({
   outExtension({ format }) {
     return { js: format === 'esm' ? '.mjs' : '.js' };
   },
-  external: ['react', 'react-dom', 'react-hook-form', 'zod', '@hookform/resolvers', '@hookform/resolvers/zod'],
+  external: [
+    'react',
+    'react-dom',
+    'react-hook-form',
+    'zod',
+    '@hookform/resolvers',
+    '@hookform/resolvers/zod',
+  ],
 });
